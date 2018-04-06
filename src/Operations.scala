@@ -22,6 +22,7 @@ object Operations {
     },
     ")" -> new Operation {
       override val priority = 3
+      override val paramsNumber: Int = 1
     }
   )
 
