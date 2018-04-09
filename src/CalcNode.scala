@@ -1,10 +1,13 @@
-abstract class CalcNode {
-  var parentNode:CalcNode
-  var childNodes:List[CalcNode]
+trait CalcNode {
 
-  var operation:Operation
+  var parentNode:CalcNode = null
+  var childNodes:List[CalcNode] = List ()
 
-  var value:Double
+  var item:String
 
-  def processNode(): Double
+  var operation:Operation = OperationsMatch.matchOperations(item:String)
+
+  var value:Double = try item.toDouble catch {case n: NumberFormatException => 0 }
+
+  def processNode(params:List[Double]) = { value = operation.getValue(params) }
 }

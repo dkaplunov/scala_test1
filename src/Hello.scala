@@ -7,35 +7,39 @@ object Hello extends App {
 
   var result:Double = 0;
 
-  def isNumeric (item:String) = scala.util.Try(item.toDouble).isSuccess
-
   def getDigitsFromStack (numberDigits:Int): List[Double] = {
     var res = List[Double]()
     for (i:Int <- 0 to numberDigits-1) {
-      res = digitStack.head::res
-      digitStack = digitStack.tail
+      res = digitStack.pullData().value::res
     }
     return res;
   }
 
+
   def operate (item:String) : Null = {
 
-    if (digitStack.length == 0) return null;
+    if (digitStack.getLength() == 0) return null;
 
-    if (OperationsMatch.matchOperations(operStack.head).priority < OperationsMatch.matchOperations(item).priority) operStack = item::operStack
-    else if (OperationsMatch.matchOperations(operStack.head).priority>=0) {
-      result = OperationsMatch.matchOperations(operStack.head).getValue (getDigitsFromStack(OperationsMatch.matchOperations(item).paramsNumber))
-      digitStack = result::digitStack
-      operStack = operStack.tail
+    if (operStack.firstElement().operation.priority < OperationsMatch.matchOperations(item).priority) operStack.pushData(new CalcNodeImp(item))
+    else if (operStack.firstElement().operation.priority>=0) {
+      operStack.firstElement().processNode(getDigitsFromStack(OperationsMatch.matchOperations(item).paramsNumber))
+      result = operStack.firstElement().value;
+      digitStack.pushData(new CalcNodeImp(result.toString))
+      operStack.pullData()
       operate(item);
     }
     return null
   }
 
-  var operStack = List[String] ("B")
-  var digitStack = List[Double] ()
+  class OperStack (var dataList: List [CalcNode]) extends CalcStack
+  class DigitStack (var dataList: List [CalcNode]) extends CalcStack
+  class CalcNodeImp (var item: String) extends CalcNode
+
+  var operStack = new OperStack (List[CalcNode] (new CalcNodeImp ("+"))) //List[String] ("B")
+  var digitStack = new DigitStack(List[CalcNode](new CalcNodeImp ("0")))//List[Double] ()
+
   reF.findAllIn(str+"F").foreach(item => {
-    if (isNumeric (item)) digitStack = item.toDouble::digitStack else operate(item)
+    if (OperationsMatch.isNumeric (item)) digitStack.pushData(new CalcNodeImp(item))  // = item.toDouble::digitStack else operate(item)
   })
 
   println(result);
