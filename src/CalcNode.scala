@@ -1,11 +1,10 @@
-class CalcNode {
-  var parentNode:CalcNode = null
-  var childNodes:List[CalcNode] = List ()
+abstract class CalcNode {
+  var parentNode:CalcNode
+  var childNodes:List[CalcNode]
 
-  var value:Double = null;
+  var operation:Operation
 
-  def processNode(): Double = {
+  var value:Double
 
-    return 0
-  }
+  def processNode(): Double
 }

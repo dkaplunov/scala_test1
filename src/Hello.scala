@@ -1,5 +1,5 @@
 object Hello extends App {
-  var str = "1+4-3-6"//scala.io.StdIn.readLine()
+  var str = "1+4*3-2-6"//scala.io.StdIn.readLine()
 
   val re = """\d+|(\w+\s*\()|\(|\)|\+|\*|\/|\-""".r
   val reF = """(\w+)|\(|\)|\+|\*|\/|\-""".r
@@ -22,9 +22,9 @@ object Hello extends App {
 
     if (digitStack.length == 0) return null;
 
-    if (Operations.operations(operStack.head).priority < Operations.operations(item).priority) operStack = item::operStack
-    else if (Operations.operations(operStack.head).priority>=0) {
-      result = Operations.operations(operStack.head).getValue (getDigitsFromStack(Operations.operations(item).paramsNumber))
+    if (OperationsMatch.matchOperations(operStack.head).priority < OperationsMatch.matchOperations(item).priority) operStack = item::operStack
+    else if (OperationsMatch.matchOperations(operStack.head).priority>=0) {
+      result = OperationsMatch.matchOperations(operStack.head).getValue (getDigitsFromStack(OperationsMatch.matchOperations(item).paramsNumber))
       digitStack = result::digitStack
       operStack = operStack.tail
       operate(item);
@@ -39,8 +39,5 @@ object Hello extends App {
   })
 
   println(result);
-
-/*  println( Operations.operations("*").priority);
-  println( Operations.operations("*").getValue (3,5));*/
 
 }
