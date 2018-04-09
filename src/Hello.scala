@@ -35,11 +35,11 @@ object Hello extends App {
   class DigitStack (var dataList: List [CalcNode]) extends CalcStack
   class CalcNodeImp (var item: String) extends CalcNode
 
-  var operStack = new OperStack (List[CalcNode] (new CalcNodeImp ("+"))) //List[String] ("B")
+  var operStack = new OperStack (List[CalcNode] (new CalcNodeImp ("B"))) //List[String] ("B")
   var digitStack = new DigitStack(List[CalcNode](new CalcNodeImp ("0")))//List[Double] ()
 
   reF.findAllIn(str+"F").foreach(item => {
-    if (OperationsMatch.isNumeric (item)) digitStack.pushData(new CalcNodeImp(item))  // = item.toDouble::digitStack else operate(item)
+    if (OperationsMatch.isNumeric (item)) digitStack.pushData(new CalcNodeImp(item)) else operate(item)  // = item.toDouble::digitStack else operate(item)
   })
 
   println(result);
