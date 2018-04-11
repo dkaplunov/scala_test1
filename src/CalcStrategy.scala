@@ -1,4 +1,4 @@
 trait CalcStrategy {
-  val reF = """(\w+)|\(|\)|\+|\*|\/|\-""".r
+  val reF = """(\w+)(\.\d+)?|\(|\)|\+|\*|\/|\-""".r
   def processCalc (str:String) : Double
 }
