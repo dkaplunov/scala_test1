@@ -1,3 +1,5 @@
+package general
+
 object OperationsMatch {
 
   def isNumeric (item:String) = scala.util.Try(item.toDouble).isSuccess

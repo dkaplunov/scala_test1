@@ -1,7 +1,6 @@
-trait CalcNode {
+package general
 
-  var parentNode:CalcNode = null
-  var childNodes:List[CalcNode] = List ()
+trait CalcNode {
 
   var item:String
 

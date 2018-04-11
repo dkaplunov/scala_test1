@@ -1,3 +1,7 @@
+package stack
+
+import general.CalcNode
+
 trait CalcStack {
 
   var dataList:List [CalcNode]

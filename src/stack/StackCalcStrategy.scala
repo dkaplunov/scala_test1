@@ -1,3 +1,7 @@
+package stack
+
+import general.{CalcNode, CalcStrategy, OperationsMatch}
+
 object StackCalcStrategy extends CalcStrategy {
   var result:Double = 0;
 

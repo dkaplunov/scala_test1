@@ -1,3 +1,5 @@
+package general
+
 trait Operation {
   val priority:Int = 0;
   val paramsNumber = 2;
