@@ -34,7 +34,6 @@ object StackCalcStrategy extends CalcStrategy {
 
   class OperStack (var dataList: List [CalcNode]) extends CalcStack
   class DigitStack (var dataList: List [CalcNode]) extends CalcStack
-  class CalcNodeImp (var item: String) extends CalcNode
 
   var operStack = new OperStack (List[CalcNode] (new CalcNodeImp ("(")))
   var digitStack = new DigitStack(List[CalcNode](new CalcNodeImp ("0")))
