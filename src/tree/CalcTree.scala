@@ -1,16 +1,13 @@
 package tree
 
-import general.CalcNode
+object CalcTree {
+  def addNodeToTree (calcTreeNode: CalcTreeNode, prevNode: CalcTreeNode):CalcTreeNode = {
+//    if (prevNode == null) return _;
 
-trait CalcTree {
-  var parentNode:CalcNode = null
-  var childNodes:List[CalcNode] = List ()
-  var currentData:CalcNode
+    if (calcTreeNode.value != null) prevNode.addChildNode(calcTreeNode)
+    else calcTreeNode.setParentNode(prevNode)
 
-  def processNode (calcCollection: Iterator[String]):Double = _
+    return calcTreeNode
 
-  def addChildNode (calcNode: CalcNode) = calcNode :: childNodes
-
-  def setParentNode (calcNode: CalcNode) = parentNode = calcNode
-
+  }
 }

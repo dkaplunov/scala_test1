@@ -37,7 +37,7 @@ object OperationsMatch {
     }
     case _  => new Operation {
       override val priority = 1
-      override val paramsNumber: Int = 1
+      override val paramsNumber: Int = 0
     }
   }
 

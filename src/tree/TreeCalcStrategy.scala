@@ -4,12 +4,18 @@ import general.{CalcNode, CalcStrategy}
 
 object TreeCalcStrategy extends CalcStrategy {
 
-  class CalcTreeImp (var currentData: CalcNode) extends CalcTree
+  class CalcTreeImp (var item: String) extends CalcTreeNode
 
   override def processCalc(str: String): Double = {
+    var rootNode = new CalcTreeImp("(");
+    var prevNode:CalcTreeNode = rootNode
+    reF.findAllIn(str+")").foreach(item => {
+      prevNode = CalcTree.addNodeToTree(new CalcTreeImp(item), prevNode)
+    })
 
-    val calcCollection = reF.findAllIn("("+str+")")
-    return new CalcTreeImp(new CalcNodeImp(calcCollection.next())).processNode(calcCollection)
+
+
+    return rootNode.calcNode()
 
   }
 }
