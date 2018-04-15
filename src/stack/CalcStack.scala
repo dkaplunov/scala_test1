@@ -1,6 +1,11 @@
+/**
+ * Реализация стека - основные операции - взять с вершины, положить в стек
+ * Copyright (c) 2018. Kaplunov Dmitry (kda2266@gmail.com)
+ */
+
 package stack
 
-import general.CalcNode
+import base.CalcNode
 
 trait CalcStack {
 

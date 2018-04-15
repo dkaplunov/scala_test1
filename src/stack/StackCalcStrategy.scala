@@ -1,6 +1,12 @@
+/**
+ * Реализация стратегии разбора строки калькулятора типа Стек
+ * Используется два стека - для значений и для операций
+ * Copyright (c) 2018. Kaplunov Dmitry (kda2266@gmail.com)
+ */
+
 package stack
 
-import general.{CalcNode, CalcStrategy, OperationsMatch}
+import base.{CalcNode, CalcStrategy, OperationsMatch}
 
 object StackCalcStrategy extends CalcStrategy {
   var result:Double = 0;
@@ -14,19 +20,19 @@ object StackCalcStrategy extends CalcStrategy {
   }
 
 
-  def operate (item:String) : Null = {
+  def operate (newNode:CalcNode) : Null = {
 
     if (operStack.getLength() == 0) return null;
 
-    if (operStack.firstElement().operation.priority < OperationsMatch.matchOperations(item).priority || item == "(")
-      operStack.pushData(new CalcNodeImp(item))
+    if (operStack.firstElement().operation.priority < OperationsMatch.matchOperations(newNode).priority || newNode.item == "(")
+      operStack.pushData(newNode)
     else  {
       val node: CalcNode = operStack.pullData();
       if (node.operation.isOperate) {
         node.processNode(getDigitsFromStack(node.operation.paramsNumber))
         result = node.value;
         digitStack.pushData(new CalcNodeImp(result.toString))
-        if (node.item!="(" || item != ")") operate(item)
+        if (node.item!="(" || newNode.item != ")") operate(newNode)
       }
     }
     return null
@@ -40,7 +46,8 @@ object StackCalcStrategy extends CalcStrategy {
 
   override def processCalc(str: String): Double = {
     reF.findAllIn(str+")").foreach(item => {
-      if (OperationsMatch.isNumeric (item)) digitStack.pushData(new CalcNodeImp(item)) else operate(item)
+      val node = new CalcNodeImp(item)
+      if (node.isNumeric()) digitStack.pushData(node) else operate(node)
     })
     return result
   }

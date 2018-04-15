@@ -1,6 +1,13 @@
+/**
+ * Расширение стандартного элмента для организации дерева. Содержит список дочерних узлов и
+  * объект родительского узел, а так же методы добавления-удаления-изменения родительских и
+  * дочерних узлов, связанных с этим
+ * Copyright (c) 2018. Kaplunov Dmitry (kda2266@gmail.com)
+ */
+
 package tree
 
-import general.CalcNode
+import base.CalcNode
 
 trait CalcTreeNode extends CalcNode {
   var parentNode:CalcTreeNode = _
@@ -9,7 +16,7 @@ trait CalcTreeNode extends CalcNode {
   def calcNode ():Double = {
     var childValues:List[Double] = List ();
     childNodes.foreach(node => {
-      childValues = node.calcNode()::childValues
+      childValues = childValues :+ node.calcNode()
     })
     processNode(childValues)
 
@@ -17,16 +24,17 @@ trait CalcTreeNode extends CalcNode {
   }
 
   def addChildNode (newChildNode: CalcTreeNode) = {
-    newChildNode :: childNodes
-    if (newChildNode.parentNode != None) {
+    childNodes = childNodes :+ newChildNode
+    if (newChildNode.parentNode != null) {
       parentNode = newChildNode.parentNode;
-      parentNode.childNodes = (this::parentNode.childNodes).filterNot(p => newChildNode == p)
+      parentNode.childNodes = (parentNode.childNodes:+this).filterNot(p => newChildNode == p)
     }
+    newChildNode.parentNode = this
   }
 
   def setParentNode (parentCalcNode: CalcTreeNode) = {
       parentNode = parentCalcNode
-      parentCalcNode.childNodes = this :: parentCalcNode.childNodes
+      parentCalcNode.childNodes = parentCalcNode.childNodes :+ this
   }
 
 }
