@@ -6,8 +6,8 @@ import stack.StackCalcStrategy
 import tree.TreeCalcStrategy
 
 object Calculator extends App {
-  var strDef = "3+25/(10-5)+1"
-  var str = scala.io.StdIn.readLine()
+  var strDef = "1+25/(3+2)-10"
+  var str = "" //scala.io.StdIn.readLine()
 
 
   str = if (str.length()==0) strDef else str

@@ -24,6 +24,10 @@ object OperationsMatch {
       override val priority = 2
       override def getValue (params:List[Double]):Double = params(0)/params(1);
     }
+    case "^"  => new Operation {
+      override val priority = 3
+      override def getValue (params:List[Double]):Double = Math.pow (params(1), params(0));
+    }
     case "sin"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.sin (params(0));
     }
@@ -39,8 +43,15 @@ object OperationsMatch {
     case "exp"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.exp (params(0));
     }
+    case "sqrt"  => new FuncOperation {
+      override def getValue (params:List[Double]):Double = Math.sqrt (params(0));
+    }
     case "PI"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.PI;
+      override val addNodeSpecficType: AddingNodeBase = new ConstanteCase ()
+    }
+    case "E"  => new FuncOperation {
+      override def getValue (params:List[Double]):Double = Math.E;
       override val addNodeSpecficType: AddingNodeBase = new ConstanteCase ()
     }
     case "(" => new Operation {
