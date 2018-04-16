@@ -9,33 +9,34 @@ package stack
 import base.{CalcNode, CalcStrategy, OperationsMatch}
 
 object StackCalcStrategy extends CalcStrategy {
-  var result:Double = 0;
+  var result:Double = 0
+  override val strategyName: String = "Stack strategy"
 
   def getDigitsFromStack (numberDigits:Int): List[Double] = {
     var res = List[Double]()
     for (i:Int <- 0 to numberDigits-1) {
       res = digitStack.pullData().value::res
     }
-    return res;
+    res
   }
 
 
   def operate (newNode:CalcNode) : Null = {
 
-    if (operStack.getLength() == 0) return null;
+    if (operStack.getLength() == 0) return null
 
     if (operStack.firstElement().operation.priority < OperationsMatch.matchOperations(newNode).priority || newNode.item == "(")
       operStack.pushData(newNode)
     else  {
-      val node: CalcNode = operStack.pullData();
+      val node: CalcNode = operStack.pullData()
       if (node.operation.isOperate) {
         node.processNode(getDigitsFromStack(node.operation.paramsNumber))
-        result = node.value;
+        result = node.value
         digitStack.pushData(new CalcNodeImp(result.toString))
         if (node.item!="(" || newNode.item != ")") operate(newNode)
       }
     }
-    return null
+    null
   }
 
   class OperStack (var dataList: List [CalcNode]) extends CalcStack
@@ -49,8 +50,7 @@ object StackCalcStrategy extends CalcStrategy {
       val node = new CalcNodeImp(item)
       if (node.isNumeric()) digitStack.pushData(node) else operate(node)
     })
-    return result
+    result
   }
 
-  override val strategyName: String = "Stack strategy"
 }

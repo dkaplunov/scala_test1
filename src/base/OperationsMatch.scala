@@ -48,10 +48,12 @@ object OperationsMatch {
     }
     case "PI"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.PI;
+      override val paramsNumber: Int = 0
       override val addNodeSpecficType: AddingNodeBase = new ConstanteCase ()
     }
     case "E"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.E;
+      override val paramsNumber: Int = 0
       override val addNodeSpecficType: AddingNodeBase = new ConstanteCase ()
     }
     case "(" => new Operation {
