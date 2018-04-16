@@ -14,15 +14,14 @@ object CalcTree {
     if (calcTreeNode.item == ")") return findLocalRootNode(prevNode)
 
     prevNode.operation.addNodeSpecficType match {
-      case ConstanteCase() if (checkPriority(prevNode, calcTreeNode)) => calcTreeNode.addChildNode(prevNode.parentNode)
-      case ConstanteCase() if (!checkPriority(prevNode, calcTreeNode)) => calcTreeNode.addChildNode(prevNode)
-      case OpenParantessCase() if (prevNode.childNodes.size>0 && checkPriority(prevNode, calcTreeNode)) => calcTreeNode.addChildNode(prevNode.parentNode)
-      case OpenParantessCase() if (prevNode.childNodes.size>0&& !checkPriority(prevNode, calcTreeNode)) => calcTreeNode.addChildNode(prevNode)
+      case ConstanteCase() if checkPriority(prevNode, calcTreeNode) => calcTreeNode.addChildNode(prevNode.parentNode)
+      case ConstanteCase() if !checkPriority(prevNode, calcTreeNode) => calcTreeNode.addChildNode(prevNode)
+      case OpenParantessCase() if prevNode.childNodes.nonEmpty && checkPriority(prevNode, calcTreeNode) => calcTreeNode.addChildNode(prevNode.parentNode)
+      case OpenParantessCase() if prevNode.childNodes.nonEmpty && !checkPriority(prevNode, calcTreeNode) => calcTreeNode.addChildNode(prevNode)
       case _ => calcTreeNode.setParentNode(prevNode)
     }
 
-
-    return calcTreeNode
+    calcTreeNode
   }
 
   def checkPriority (prevNode:CalcTreeNode, calcTreeNode: CalcTreeNode) : Boolean = prevNode.parentNode.operation.priority>calcTreeNode.operation.priority
@@ -30,7 +29,8 @@ object CalcTree {
   def findLocalRootNode (prevNode: CalcTreeNode) :CalcTreeNode = {
     var node = prevNode
     while (node.item != "(") node = node.parentNode
-    return node;
+
+    node
   }
 
 }
