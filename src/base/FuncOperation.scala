@@ -6,7 +6,7 @@
 package base
 
 trait FuncOperation extends Operation {
-  override val priority = 1
+  override val priority = 4
   override val paramsNumber: Int = 1
 
 }

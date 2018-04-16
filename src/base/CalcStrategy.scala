@@ -7,7 +7,8 @@
 package base
 
 trait CalcStrategy {
-  val reF = """(\w+)(\.\d+)?|\(|\)|\+|\*|\/|\-""".r
+  val reF = """(\w+)(\.\d+)?|\(|\)|\+|\*|\/|\-|\^""".r
+  val strategyName:String
   def processCalc (str:String) : Double
   class CalcNodeImp (var item: String) extends CalcNode
 }

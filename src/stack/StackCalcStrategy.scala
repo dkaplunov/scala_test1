@@ -51,4 +51,6 @@ object StackCalcStrategy extends CalcStrategy {
     })
     return result
   }
+
+  override val strategyName: String = "Stack strategy"
 }

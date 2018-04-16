@@ -4,15 +4,24 @@
 
 import stack.StackCalcStrategy
 import tree.TreeCalcStrategy
+import base.CalcStrategy
 
 object Calculator extends App {
-  var strDef = "1+25/(3+2)-10"
+  var strDef = "sqrt (sin (PI) ^ 2 + cos (PI) ^ 2) + 1" //"sqrt(sin(PI)^2+cos(PI)^2)+1
   var str = "" //scala.io.StdIn.readLine()
 
 
   str = if (str.length()==0) strDef else str
 
-  println("Stack strategy result is "+StackCalcStrategy.processCalc(str));
-  println("Tree strategy result is "+TreeCalcStrategy.processCalc(str));
+  println("Calc expression: "+str);
+
+  calcAndPrint(StackCalcStrategy)
+  calcAndPrint(TreeCalcStrategy)
+
+  def calcAndPrint (strategy: CalcStrategy) = {
+    val name = strategy.strategyName
+    try println(name+" result is "+strategy.processCalc(str)) catch {case p: Exception => println(name+" error: "+p)
+  }
+  }
 
 }

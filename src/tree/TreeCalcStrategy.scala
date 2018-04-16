@@ -11,6 +11,8 @@ object TreeCalcStrategy extends CalcStrategy {
 
   class CalcTreeImp (var item: String) extends CalcTreeNode
 
+  override val strategyName = "Tree strategy"
+
   override def processCalc(str: String): Double = {
     val rootNode = new CalcTreeImp("(");
     var prevNode:CalcTreeNode = rootNode

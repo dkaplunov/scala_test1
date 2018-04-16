@@ -22,16 +22,6 @@ object CalcTree {
     }
 
 
-/*          if (prevNode.operation.isConst || (prevNode.item =="(" && prevNode.childNodes.size>0)) {
-            if (prevNode.parentNode.operation.priority>calcTreeNode.operation.priority) {
-                calcTreeNode.addChildNode(prevNode.parentNode)
-            } else {
-                calcTreeNode.addChildNode(prevNode)
-            }
-          } else {
-              calcTreeNode.setParentNode(prevNode)
-          }
-*/
     return calcTreeNode
   }
 

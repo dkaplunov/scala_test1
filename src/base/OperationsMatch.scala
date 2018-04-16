@@ -26,7 +26,7 @@ object OperationsMatch {
     }
     case "^"  => new Operation {
       override val priority = 3
-      override def getValue (params:List[Double]):Double = Math.pow (params(1), params(0));
+      override def getValue (params:List[Double]):Double = Math.pow (params(0), params(1))
     }
     case "sin"  => new FuncOperation {
       override def getValue (params:List[Double]):Double = Math.sin (params(0));
