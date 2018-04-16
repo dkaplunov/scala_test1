@@ -7,7 +7,7 @@ import tree.TreeCalcStrategy
 import base.CalcStrategy
 
 object Calculator extends App {
-  var strDef = "sqrt (sin (PI) ^ 2 + cos (PI) ^ 2) + 1" //"sqrt(sin(PI)^2+cos(PI)^2)+1
+  var strDef = "-1" //"sqrt(sin(PI)^2+cos(PI)^2)+1
   var str = "" //scala.io.StdIn.readLine()
 
 

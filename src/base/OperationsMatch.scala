@@ -10,11 +10,11 @@ object OperationsMatch {
   def matchOperations(node:CalcNode) = node.item match {
     case "+"  => new Operation {
       override val priority = 1
-      override def getValue (params:List[Double]):Double = params(0)+params(1);
+      override def getValue (params:List[Double]):Double = testParams(params,0)+testParams(params,1);
     }
     case "-"  => new Operation {
         override val priority = 1
-        override def getValue (params:List[Double]):Double = params(0)-params(1);
+        override def getValue (params:List[Double]):Double = testParams(params,0)-testParams(params,1);
       }
     case "*"  => new Operation {
       override val priority = 2
@@ -78,6 +78,10 @@ object OperationsMatch {
   case class OpenParantessCase () extends AddingNodeBase
   case class CloseParantessCase () extends AddingNodeBase
   case class GeneralCase () extends AddingNodeBase
+
+  def testParams (params:List[Double], num:Int):Double = {
+    if (params.length>num) params(num) else 0.0
+  }
 
 }
 
